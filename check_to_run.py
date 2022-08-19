@@ -1,4 +1,4 @@
-from os import system
+import subprocess
 from sql_connectors import connect_single
 from config_parser import get_config
 
@@ -18,7 +18,7 @@ def run_cleanup(logger):
     try:
         path = get_config().get('SCRIPTS','cleanup')
         cmd = f'sh {path}'
-        _ = system.read(cmd)
+        _ = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
     except Exception as e:
         logger.critical(f'failed to run cleanup : {e}')
 
@@ -27,7 +27,7 @@ def get_new_batch(logger):
     try:
         path = get_config().get('SCRIPTS','batch')
         cmd = f'python3 {path}'
-        _ = system.read(cmd)
+        _ = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
     except Exception as e:
         logger.critical(f'failed to get new run : {e}')
 
