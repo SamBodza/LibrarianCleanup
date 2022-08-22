@@ -8,10 +8,13 @@ from config_parser import get_config
 
 
 def checker(last_ct, logger):
-    time.sleep(900)
+    time.sleep(600)
     ct = get_value(logger)
+    logger.info(f'got value as {ct}')
     if ct == last_ct:
+        logger.info(f'values are equal, running cleanup')
         run_cleanup(logger)
+        logger.info(f'getting new values')
         get_new_batch(logger)
     else:
         checker(ct, logger)

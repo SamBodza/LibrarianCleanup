@@ -17,7 +17,7 @@ def get_value(logger):
 def run_cleanup(logger):
     try:
         path = get_config().get('SCRIPTS','cleanup')
-        cmd = f'sh {path}'
+        cmd = f'sudo sh {path}'
         _ = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
     except Exception as e:
         logger.critical(f'failed to run cleanup : {e}')
@@ -26,7 +26,7 @@ def run_cleanup(logger):
 def get_new_batch(logger):
     try:
         path = get_config().get('SCRIPTS','batch')
-        cmd = f'python3 {path}'
+        cmd = f'sudo python3 {path}'
         _ = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
     except Exception as e:
         logger.critical(f'failed to get new run : {e}')
