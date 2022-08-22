@@ -8,7 +8,7 @@ from config_parser import get_config
 
 
 def checker(last_ct, logger):
-    time.sleep(60)
+    time.sleep(300)
     ct = get_value(logger)
     logger.info(f'got value as {ct}')
     if ct == last_ct:
